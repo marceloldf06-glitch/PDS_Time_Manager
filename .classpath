@@ -6,6 +6,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path=""/>
-	<classpathentry kind="lib" path="C:/Users/aluno/PDS_Time_Manager/mysql-connector-j-26.7.0.jar"/>
+	<classpathentry kind="lib" path="mysql-connector-j-26.7.0.jar"/>
+	<classpathentry kind="lib" path="com.jgoodies.forms_1.9.0.v20240327-0800.jar"/>
+	<classpathentry kind="lib" path="com.jgoodies.common_1.8.1.v20240327-0800.jar"/>
+	<classpathentry kind="lib" path="com.miglayout.swing_11.4.3.jar"/>
+	<classpathentry kind="lib" path="com.miglayout.core_11.4.3.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
