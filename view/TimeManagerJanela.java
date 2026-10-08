@@ -94,7 +94,9 @@ public class TimeManagerJanela extends JFrame {
 		JOptionPane.showMessageDialog(this, texto);
 	}
 	
-	public void mostrar
+	public void mostrar() {
+		
+	}
 	
 	public void LimparCampos() {
 		txtNome.setText("");		
