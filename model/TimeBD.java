@@ -37,7 +37,6 @@ public class TimeBD {
 			ps.setString(1, t.getNome());
 			ps.setInt(2, t.getHRInicio());
 			ps.setInt(3, t.getHRFim());
-			ps.setInt(4, t.getTag());
 			ps.setString(5, t.getData());
 			ps.executeUpdate();
 		} catch (SQLException erro) {

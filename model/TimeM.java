@@ -2,7 +2,8 @@ package model;
 
 public class TimeM {
 	String Nome, Data;
-	int HRInicio, HRFim, Tag, IdHorarios;
+	int HRInicio, HRFim, IdHorarios;
+	Enum tag;
 
 	public String getNome() {
 		return Nome;
@@ -36,12 +37,8 @@ public class TimeM {
 		HRFim = hRFim;
 	}
 
-	public int getTag() {
-		return Tag;
-	}
-
-	public void setTag(int tag) {
-		Tag = tag;
+	public Enum getTag() {
+		return getTag();
 	}
 
 }
