@@ -12,16 +12,24 @@ import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 
 public class TimeManagerJanela extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNome;
-	private JTextField txtTag;
 	private JTextField txtHr_inicio;
 	private JTextField txtHr_fim;
 	private JTextField txtDescricao;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -48,45 +56,59 @@ public class TimeManagerJanela extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[160px,grow][160px,grow][160px][160px][160px]",
-				"[100px][100px][100px][100px][100px][100px]"));
-
-		JButton btnAdicionar = new JButton("Adicionar");
-
-		txtNome = new JTextField();
-		contentPane.add(txtNome, "cell 0 1,growx");
-		txtNome.setColumns(10);
-
-		txtTag = new JTextField();
-		contentPane.add(txtTag, "cell 0 2,growx");
-		txtTag.setColumns(10);
-
-		txtDescricao = new JTextField();
-		contentPane.add(txtDescricao, "cell 1 2,growx");
-		txtDescricao.setColumns(10);
-
-		txtHr_inicio = new JTextField();
-		contentPane.add(txtHr_inicio, "cell 0 3,growx");
-		txtHr_inicio.setColumns(10);
-
-		txtHr_fim = new JTextField();
-		contentPane.add(txtHr_fim, "cell 1 3,growx");
-		txtHr_fim.setColumns(10);
-		contentPane.add(btnAdicionar, "cell 0 4,alignx center,aligny center");
-
-		JButton btnMostrar = new JButton("Mostrar");
-		btnMostrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		contentPane.add(btnMostrar, "cell 2 4,alignx center,aligny center");
-
-		JButton btnRemover = new JButton("Remover");
-		btnRemover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		contentPane.add(btnRemover, "cell 4 4,alignx center,aligny center");
+		contentPane.setLayout(new MigLayout("", "[160px,grow][160px,grow][160px][160px][160px]", "[100px][100px][100px][100px][100px][100px]"));
+				
+				lblNewLabel = new JLabel("Nome:");
+				lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+				contentPane.add(lblNewLabel, "cell 0 0,alignx trailing");
+		
+				txtNome = new JTextField();
+				contentPane.add(txtNome, "cell 1 0 2 1,growx");
+				txtNome.setColumns(10);
+				
+				lblNewLabel_1 = new JLabel("Tag:");
+				contentPane.add(lblNewLabel_1, "cell 0 1,alignx trailing");
+								
+								comboBox = new JComboBox();
+								contentPane.add(comboBox, "cell 1 1 2 1,growx");
+								
+								lblNewLabel_2 = new JLabel("Horario inicial");
+								contentPane.add(lblNewLabel_2, "cell 0 2,alignx trailing");
+						
+								txtHr_inicio = new JTextField();
+								contentPane.add(txtHr_inicio, "cell 1 2 2 1,growx");
+								txtHr_inicio.setColumns(10);
+								
+								lblNewLabel_3 = new JLabel("Horario final");
+								contentPane.add(lblNewLabel_3, "cell 0 3,alignx trailing");
+						
+								txtHr_fim = new JTextField();
+								contentPane.add(txtHr_fim, "cell 1 3 2 1,growx");
+								txtHr_fim.setColumns(10);
+						
+						lblNewLabel_4 = new JLabel("Descrição");
+						contentPane.add(lblNewLabel_4, "cell 0 4,alignx trailing");
+				
+						txtDescricao = new JTextField();
+						contentPane.add(txtDescricao, "cell 1 4 2 1,growx");
+						txtDescricao.setColumns(10);
+		
+				JButton btnAdicionar = new JButton("Adicionar");
+				contentPane.add(btnAdicionar, "cell 1 5,alignx center,aligny center");
+				
+						JButton btnMostrar = new JButton("Mostrar");
+						btnMostrar.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+							}
+						});
+						contentPane.add(btnMostrar, "cell 2 5,alignx center,aligny center");
+						
+								JButton btnRemover = new JButton("Remover");
+								btnRemover.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+									}
+								});
+								contentPane.add(btnRemover, "cell 3 5,alignx center,aligny center");
 
 	}
 
