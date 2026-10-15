@@ -14,8 +14,14 @@ public class TimeController {
 		this.model = model;
 	}
 	
-	
-	public void AtualizarNome() {
+	public void AtualizarValores() {
+		model.setData();
+		model.setHRInicio(Integer.parseInt(view.getHrInicio()));
+		model.setHRFim(Integer.parseInt(view.getHrFim()));
+		model.setNome(null);
 		
+	}
+	public void adicionar() {
+		bd.salvar(model);
 }
 }	
