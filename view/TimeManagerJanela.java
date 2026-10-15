@@ -5,7 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.TimeM;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,7 +33,8 @@ public class TimeManagerJanela extends JFrame {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	private JComboBox tag;
+	private JComboBox<TimeM.Tag> tag;
+	private JList list;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,8 +55,7 @@ public class TimeManagerJanela extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[160px,grow][160px,grow][160px][160px][160px]",
-				"[100px][100px][100px][100px][100px][100px]"));
+		contentPane.setLayout(new MigLayout("", "[160px][160px][160px][160px][160px,grow]", "[100px,grow][100px,grow][100px,grow][100px,grow][100px,grow][100px,grow]"));
 
 		lblNewLabel = new JLabel("Nome:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -60,11 +64,15 @@ public class TimeManagerJanela extends JFrame {
 		txtNome = new JTextField();
 		contentPane.add(txtNome, "cell 1 0 2 1,growx");
 		txtNome.setColumns(10);
+		
+		list = new JList();
+		contentPane.add(list, "cell 3 0 2 5,grow");
 
 		lblNewLabel_1 = new JLabel("Tag:");
 		contentPane.add(lblNewLabel_1, "cell 0 1,alignx trailing");
 
-		tag = new JComboBox();
+		tag = new JComboBox<>();
+		tag.setModel(new DefaultComboBoxModel<>(TimeM.Tag.values()));
 		contentPane.add(tag, "cell 1 1 2 1,growx");
 
 		lblNewLabel_2 = new JLabel("Horario inicial");

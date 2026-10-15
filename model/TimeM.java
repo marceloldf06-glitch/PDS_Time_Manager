@@ -1,10 +1,18 @@
 package model;
 
 public class TimeM {
-	String Nome, Data;
-	int HRInicio, HRFim, IdHorarios;
-	Enum tag;
-
+	private String Nome, Data;
+	private int HRInicio, HRFim;
+	public enum Tag {
+	Trabalho,
+	Estudo,
+	Comer,
+	Dormir,
+	Lazer,
+	Treino,
+	Outros,
+	};
+	
 	public String getNome() {
 		return Nome;
 	}
@@ -36,9 +44,4 @@ public class TimeM {
 	public void setHRFim(int hRFim) {
 		HRFim = hRFim;
 	}
-
-	public Enum getTag() {
-		return getTag();
-	}
-
 }
