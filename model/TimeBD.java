@@ -9,31 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimeBD {
-	// Os tres dados da conexao ficam num lugar so. Mudou o servidor,
-	// muda uma linha - nao quatro.
+	
 	private static final String URL = "jdbc:mysql://localhost:3306/hora";
 	private static final String USER = "aluno_cd";
 	private static final String SENHA = "aluno_pw";
 
-	// Conexao NOVA a cada chamada. Guardar uma unica conexao num atributo
-	// parece economico, mas o servidor a derruba por inatividade e a
-	// aplicacao inteira para de funcionar ate ser reiniciada.
+	
 	private Connection abrir() throws SQLException {
 		return DriverManager.getConnection(URL, USER, SENHA);
 	}
 
 	public void salvar(TimeM t) {
-		// ---- REGRAS: sempre antes de gravar --------------------------
-
-		//////// tratamento de erro acima
 		String sql = "INSERT INTO cadastro (nome, hora_inicio, hora_fim, tag, Data) VALUES (?, ?, ?, ?, ?)";
-		// try-with-resources: conexao e comando sao fechados sozinhos,
-		// mesmo se der excecao no meio.
 		try (Connection con = abrir(); PreparedStatement ps = con.prepareStatement(sql)) {
 
-			// Indices comecam em 1, nunca em 0.
-			// O valor viaja SEPARADO do comando: por isso um nome como
-			// O'Brien grava sem quebrar o SQL.
 			ps.setString(1, t.getNome());
 			ps.setInt(2, t.getHRInicio());
 			ps.setInt(3, t.getHRFim());
@@ -51,7 +40,7 @@ public class TimeBD {
 		try (Connection con = abrir(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, Idhorario.trim());
 			try (ResultSet rs = ps.executeQuery()) {
-				return rs.next(); // achou pelo menos uma linha?
+				return rs.next();
 
 			}
 		} catch (SQLException erro) {
@@ -68,7 +57,7 @@ public class TimeBD {
 				ResultSet rs = ps.executeQuery()) {
 
 			if (rs.next()) {
-				return rs.getInt(1); // primeira coluna do resultado
+				return rs.getInt(1);
 
 			}
 			return 0;
@@ -100,11 +89,8 @@ public class TimeBD {
 			throw new RuntimeException("Erro ao listar: " + erro.getMessage(), erro);
 
 		}
-		// Devolve objetos, e nao o ResultSet: ele morre quando a conexao fecha.
 		return lista;
 	}
-
-	/** Teste de ambiente: rode esta classe antes de depurar qualquer botao. */
 	public static void main(String[] args) {
 		TimeBD bd = new TimeBD();
 		try (Connection con = bd.abrir()) {

@@ -1,14 +1,21 @@
 package controller;
 
 import view.*;
-import model.TimeBD;
+import model.*;
 
 public class TimeController {
 
 	private TimeManagerJanela view;
-
-	public TimeController(TimeManagerJanela view) {
+	private TimeBD bd;
+	private TimeM model;
+	public TimeController(TimeManagerJanela view, TimeBD bd, TimeM model) {
 		this.view = view;
+		this.bd = bd;
+		this.model = model;
 	}
-
+	
+	
+	public void AtualizarNome() {
+		
 }
+}	
