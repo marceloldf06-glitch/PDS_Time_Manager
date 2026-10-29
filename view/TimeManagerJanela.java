@@ -12,6 +12,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -150,5 +152,11 @@ public class TimeManagerJanela extends JFrame {
 
 	public String txtDescricao() {
 		return txtDescricao.getText();
+	}
+	public String getData() {
+		LocalDate dataAtual = LocalDate.now();
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataEmString = dataAtual.format(formatador);
+        return dataEmString;
 	}
 }

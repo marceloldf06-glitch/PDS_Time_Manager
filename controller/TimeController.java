@@ -15,10 +15,10 @@ public class TimeController {
 	}
 	
 	public void AtualizarValores() {
-		model.setData();
+		model.setData(view.getData());
 		model.setHRInicio(Integer.parseInt(view.getHrInicio()));
 		model.setHRFim(Integer.parseInt(view.getHrFim()));
-		model.setNome(null);
+		model.setNome(view.getNome());
 		
 	}
 	public void adicionar() {
