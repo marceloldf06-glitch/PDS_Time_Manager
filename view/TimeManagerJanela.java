@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.TimeController;
 import model.TimeM;
 import net.miginfocom.swing.MigLayout;
 
@@ -23,7 +24,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 
 public class TimeManagerJanela extends JFrame {
-
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNome;
@@ -100,10 +100,16 @@ public class TimeManagerJanela extends JFrame {
 
 		JButton btnAdicionar = new JButton("Adicionar");
 		contentPane.add(btnAdicionar, "cell 1 5,alignx center,aligny center");
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 
 		JButton btnMostrar = new JButton("Mostrar");
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		contentPane.add(btnMostrar, "cell 2 5,alignx center,aligny center");
@@ -131,7 +137,7 @@ public class TimeManagerJanela extends JFrame {
 		txtHr_inicio.setText("");
 		txtHr_fim.setText("");
 		txtDescricao.setText("");
-
+		
 	}
 
 	public void fechar() {
@@ -158,5 +164,8 @@ public class TimeManagerJanela extends JFrame {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dataEmString = dataAtual.format(formatador);
         return dataEmString;
+	}
+	public String getTag() {
+		return tag.getSelectedItem().toString();
 	}
 }

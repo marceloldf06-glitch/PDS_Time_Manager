@@ -19,7 +19,7 @@ public class TimeController {
 		model.setHRInicio(Integer.parseInt(view.getHrInicio()));
 		model.setHRFim(Integer.parseInt(view.getHrFim()));
 		model.setNome(view.getNome());
-		
+		model.setvalor_tag(view.getTag());
 	}
 	public void adicionar() {
 		bd.salvar(model);

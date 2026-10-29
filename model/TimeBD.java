@@ -20,12 +20,13 @@ public class TimeBD {
 	}
 
 	public void salvar(TimeM t) {
-		String sql = "INSERT INTO cadastro (nome, hora_inicio, hora_fim, tag, Data) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO horarios (nome, hora_inicio, hora_fim, tag, Data) VALUES (?, ?, ?, ?, ?)";
 		try (Connection con = abrir(); PreparedStatement ps = con.prepareStatement(sql)) {
 
 			ps.setString(1, t.getNome());
 			ps.setInt(2, t.getHRInicio());
 			ps.setInt(3, t.getHRFim());
+			ps.setString(4, t.getvalor_tag());
 			ps.setString(5, t.getData());
 			ps.executeUpdate();
 		} catch (SQLException erro) {

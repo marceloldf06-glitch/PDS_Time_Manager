@@ -13,7 +13,7 @@ public class Main {
 		TimeM model = new TimeM();
 		TimeBD BD = new TimeBD();
 		TimeController controller = new TimeController(janela, BD, model);
-		BD.salvar(model);
+		
 
 	}
 }
