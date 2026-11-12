@@ -1,8 +1,7 @@
 package model;
 
 public class TimeM {
-	private String Nome, Data, valor_tag;
-	private int HRInicio, HRFim;
+	private String Nome, Data, valor_tag, HRInicio, HRFim;
 	public enum Tag {
 	Trabalho("Trabalho"),
 	Estudo("Estudo"),
@@ -42,19 +41,19 @@ public class TimeM {
 		Data = data;
 	}
 
-	public int getHRInicio() {
+	public String getHRInicio() {
 		return HRInicio;
 	}
 
-	public void setHRInicio(int hrInicio) {
+	public void setHRInicio(String hrInicio) {
 		HRInicio = hrInicio;
 	}
 
-	public int getHRFim() {
+	public String getHRFim() {
 		return HRFim;
 	}
 
-	public void setHRFim(int hRFim) {
+	public void setHRFim(String hRFim) {
 		HRFim = hRFim;
 	}
 }

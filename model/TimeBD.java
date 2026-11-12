@@ -24,8 +24,8 @@ public class TimeBD {
 		try (Connection con = abrir(); PreparedStatement ps = con.prepareStatement(sql)) {
 
 			ps.setString(1, t.getNome());
-			ps.setInt(2, t.getHRInicio());
-			ps.setInt(3, t.getHRFim());
+			ps.setString(2, t.getHRInicio());
+			ps.setString(3, t.getHRFim());
 			ps.setString(4, t.getvalor_tag());
 			ps.setString(5, t.getData());
 			ps.executeUpdate();
@@ -81,8 +81,8 @@ public class TimeBD {
 
 				TimeM e = new TimeM();
 				e.setNome(rs.getString("nome"));
-				e.setHRInicio(Integer.parseInt((rs.getString("hora_inicio"))));
-				e.setHRFim(Integer.parseInt((rs.getString("hora_fim"))));
+				e.setHRInicio(rs.getString("hora_inicio"));
+				e.setHRFim(rs.getString("hora_fim"));
 				lista.add(e);
 			}
 		} catch (SQLException erro) {

@@ -16,8 +16,8 @@ public class TimeController {
 	
 	public void AtualizarValores() {
 		model.setData(view.getData());
-		model.setHRInicio(Integer.parseInt(view.getHrInicio()));
-		model.setHRFim(Integer.parseInt(view.getHrFim()));
+		model.setHRInicio(view.getHrInicio());
+		model.setHRFim(view.getHrFim());
 		model.setNome(view.getNome());
 		model.setvalor_tag(view.getTag());
 	}
