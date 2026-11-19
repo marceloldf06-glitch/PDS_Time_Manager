@@ -39,8 +39,6 @@ public class TimeM {
 
 	public String getDescricao() { return Descricao; }
 	public void setDescricao(String descricao) { Descricao = descricao; }
-
-	// texto exibido na JList (uma linha por lembrete, sem estilo)
 	@Override
 	public String toString() {
 		String desc = (Descricao == null || Descricao.isEmpty()) ? "-" : Descricao;

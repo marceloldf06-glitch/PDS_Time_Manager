@@ -21,13 +21,13 @@ public class TimeController {
 
 		// liga os botões da janela aos métodos do controller
 		view.addAdicionarListener(e -> adicionar());
-		view.addMostrarListener(e -> mostrar());
+		view.addMostrarListener(e -> mostrarDetalhes());
 		view.addRemoverListener(e -> remover());
 	}
 
 	public void iniciar() {
 		view.setVisible(true);
-		mostrar();
+		atualizarLista();
 	}
 
 	public void AtualizarValores() {
@@ -63,19 +63,28 @@ public class TimeController {
 			bd.salvar(model);
 			view.mostrarMensagem("Salvo com sucesso!");
 			view.LimparCampos();
-			mostrar();
+			atualizarLista();
 		} catch (RuntimeException ex) {
 			view.mostrarErro(ex.getMessage());
 		}
 	}
 
-	public void mostrar() {
+	public void atualizarLista() {
 		try {
 			List<TimeM> lista = bd.listarTodos();
 			view.setLista(lista);
 		} catch (RuntimeException ex) {
 			view.mostrarErro(ex.getMessage());
 		}
+	}
+
+	public void mostrarDetalhes() {
+		TimeM selecionado = view.getSelecionado();
+		if (selecionado == null) {
+			view.mostrarErro("Selecione um lembrete da lista para ver os detalhes.");
+			return;
+		}
+		view.mostrarDetalhes(selecionado);
 	}
 
 	public void remover() {
@@ -86,7 +95,7 @@ public class TimeController {
 		}
 		try {
 			bd.excluir(selecionado.getId());
-			mostrar();
+			atualizarLista();
 		} catch (RuntimeException ex) {
 			view.mostrarErro(ex.getMessage());
 		}

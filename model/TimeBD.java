@@ -19,7 +19,7 @@ public class TimeBD {
 	}
 
 	public void salvar(TimeM t) {
-		String sql = "INSERT INTO horarios (nome, hora_inicio, hora_fim, tag, Data, Descricao) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO horarios (nome, hora_inicio, hora_fim, tag, Data, descricao) VALUES (?, ?, ?, ?, ?, ?)";
 		try (Connection con = abrir(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, t.getNome());
 			ps.setString(2, t.getHRInicio());
@@ -70,7 +70,7 @@ public class TimeBD {
 	}
 
 	public List<TimeM> listarTodos() {
-		String sql = "SELECT idhorarios, nome, hora_inicio, hora_fim, tag, Descricao FROM horarios ORDER BY hora_inicio, nome";
+		String sql = "SELECT idhorarios, nome, hora_inicio, hora_fim, tag, descricao, Data FROM horarios ORDER BY hora_inicio, nome";
 		List<TimeM> lista = new ArrayList<>();
 		try (Connection con = abrir();
 				PreparedStatement ps = con.prepareStatement(sql);
@@ -82,7 +82,8 @@ public class TimeBD {
 				e.setHRInicio(rs.getString("hora_inicio"));
 				e.setHRFim(rs.getString("hora_fim"));
 				e.setvalor_tag(rs.getString("tag"));
-				e.setDescricao(rs.getString("Descricao"));
+				e.setDescricao(rs.getString("descricao"));
+				e.setData(rs.getString("Data"));
 				lista.add(e);
 			}
 		} catch (SQLException erro) {

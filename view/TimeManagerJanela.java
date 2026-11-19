@@ -82,7 +82,7 @@ public class TimeManagerJanela extends JFrame {
 		contentPane.add(btnRemover, "cell 3 5,alignx center,aligny center");
 	}
 
-	
+	// ---- ligação com o controller ----
 	public void addAdicionarListener(ActionListener l) { btnAdicionar.addActionListener(l); }
 	public void addMostrarListener(ActionListener l) { btnMostrar.addActionListener(l); }
 	public void addRemoverListener(ActionListener l) { btnRemover.addActionListener(l); }
@@ -94,11 +94,15 @@ public class TimeManagerJanela extends JFrame {
 		}
 	}
 
+	public void mostrarDetalhes(TimeM t) {
+		new DetalhesJanela(this, t).setVisible(true);
+	}
+
 	public TimeM getSelecionado() {
 		return list.getSelectedValue();
 	}
 
-	
+	// ---- mensagens ----
 	public void mostrarMensagem(String texto) {
 		JOptionPane.showMessageDialog(this, texto);
 	}
@@ -118,14 +122,14 @@ public class TimeManagerJanela extends JFrame {
 		dispose();
 	}
 
-	
+	// ---- getters ----
 	public String getNome() { return txtNome.getText(); }
 	public String getHrInicio() { return txtHr_inicio.getText(); }
-	public String getHrFim() { return txtHr_fim.getText(); } 
+	public String getHrFim() { return txtHr_fim.getText(); } // antes retornava txtHr_inicio
 	public String getDescricao() { return txtDescricao.getText(); }
 
 	public String getData() {
-	
+		// formato ISO (yyyy-MM-dd) é o aceito por colunas DATE do MySQL
 		return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
