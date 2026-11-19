@@ -9,30 +9,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimeBD {
-	
+
 	private static final String URL = "jdbc:mysql://localhost:3306/hora";
 	private static final String USER = "aluno_cd";
 	private static final String SENHA = "aluno_pw";
 
-	
 	private Connection abrir() throws SQLException {
 		return DriverManager.getConnection(URL, USER, SENHA);
 	}
 
 	public void salvar(TimeM t) {
-		String sql = "INSERT INTO horarios (nome, hora_inicio, hora_fim, tag, Data) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO horarios (nome, hora_inicio, hora_fim, tag, Data, Descricao) VALUES (?, ?, ?, ?, ?, ?)";
 		try (Connection con = abrir(); PreparedStatement ps = con.prepareStatement(sql)) {
-
 			ps.setString(1, t.getNome());
 			ps.setString(2, t.getHRInicio());
 			ps.setString(3, t.getHRFim());
 			ps.setString(4, t.getvalor_tag());
 			ps.setString(5, t.getData());
+			ps.setString(6, t.getDescricao());
 			ps.executeUpdate();
 		} catch (SQLException erro) {
-
 			throw new RuntimeException("Erro ao gravar: " + erro.getMessage(), erro);
+		}
+	}
 
+	public void excluir(int id) {
+		String sql = "DELETE FROM horarios WHERE idhorarios = ?";
+		try (Connection con = abrir(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException erro) {
+			throw new RuntimeException("Erro ao excluir: " + erro.getMessage(), erro);
 		}
 	}
 
@@ -42,12 +49,9 @@ public class TimeBD {
 			ps.setString(1, Idhorario.trim());
 			try (ResultSet rs = ps.executeQuery()) {
 				return rs.next();
-
 			}
 		} catch (SQLException erro) {
-
 			throw new RuntimeException("Erro ao consultar: " + erro.getMessage(), erro);
-
 		}
 	}
 
@@ -56,42 +60,37 @@ public class TimeBD {
 		try (Connection con = abrir();
 				PreparedStatement ps = con.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()) {
-
 			if (rs.next()) {
 				return rs.getInt(1);
-
 			}
 			return 0;
-
 		} catch (SQLException erro) {
-
 			throw new RuntimeException("Erro ao contar: " + erro.getMessage(), erro);
-
 		}
 	}
 
 	public List<TimeM> listarTodos() {
-		String sql = "SELECT nome, hora_inicio, hora_fim  FROM horarios ORDER BY nome";
+		String sql = "SELECT idhorarios, nome, hora_inicio, hora_fim, tag, Descricao FROM horarios ORDER BY hora_inicio, nome";
 		List<TimeM> lista = new ArrayList<>();
 		try (Connection con = abrir();
 				PreparedStatement ps = con.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()) {
-
 			while (rs.next()) {
-
 				TimeM e = new TimeM();
+				e.setId(rs.getInt("idhorarios"));
 				e.setNome(rs.getString("nome"));
 				e.setHRInicio(rs.getString("hora_inicio"));
 				e.setHRFim(rs.getString("hora_fim"));
+				e.setvalor_tag(rs.getString("tag"));
+				e.setDescricao(rs.getString("Descricao"));
 				lista.add(e);
 			}
 		} catch (SQLException erro) {
-
 			throw new RuntimeException("Erro ao listar: " + erro.getMessage(), erro);
-
 		}
 		return lista;
 	}
+
 	public static void main(String[] args) {
 		TimeBD bd = new TimeBD();
 		try (Connection con = bd.abrir()) {

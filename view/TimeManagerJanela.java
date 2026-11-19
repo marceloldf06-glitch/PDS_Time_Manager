@@ -1,27 +1,27 @@
 package view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import controller.TimeController;
-import model.TimeM;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.awt.event.ActionEvent;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JLabel;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
+import javax.swing.border.EmptyBorder;
+
+import model.TimeM;
+import net.miginfocom.swing.MigLayout;
 
 public class TimeManagerJanela extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -30,106 +30,81 @@ public class TimeManagerJanela extends JFrame {
 	private JTextField txtHr_inicio;
 	private JTextField txtHr_fim;
 	private JTextField txtDescricao;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
 	private JComboBox<TimeM.Tag> tag;
-	private JList list;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TimeManagerJanela frame = new TimeManagerJanela();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JList<TimeM> list;
+	private DefaultListModel<TimeM> listModel = new DefaultListModel<>();
+	private JButton btnAdicionar, btnMostrar, btnRemover;
 
 	public TimeManagerJanela() {
+		setTitle("Time Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 745, 691);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[160px][160px][160px][160px][160px,grow]", "[100px,grow][100px,grow][100px,grow][100px,grow][100px,grow][100px,grow]"));
+		contentPane.setLayout(new MigLayout("", "[160px][160px][160px][160px][160px,grow]",
+				"[100px,grow][100px,grow][100px,grow][100px,grow][100px,grow][100px,grow]"));
 
-		lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		contentPane.add(lblNewLabel, "cell 0 0,alignx trailing");
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPane.add(lblNome, "cell 0 0,alignx trailing");
 
-		txtNome = new JTextField();
+		txtNome = new JTextField(10);
 		contentPane.add(txtNome, "cell 1 0 2 1,growx");
-		txtNome.setColumns(10);
-		
-		list = new JList();
-		contentPane.add(list, "cell 3 0 2 5,grow");
 
-		lblNewLabel_1 = new JLabel("Tag:");
-		contentPane.add(lblNewLabel_1, "cell 0 1,alignx trailing");
+		list = new JList<>(listModel);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		contentPane.add(new JScrollPane(list), "cell 3 0 2 5,grow");
 
-		tag = new JComboBox<>();
-		tag.setModel(new DefaultComboBoxModel<>(TimeM.Tag.values()));
+		contentPane.add(new JLabel("Tag:"), "cell 0 1,alignx trailing");
+		tag = new JComboBox<>(new DefaultComboBoxModel<>(TimeM.Tag.values()));
 		contentPane.add(tag, "cell 1 1 2 1,growx");
 
-		lblNewLabel_2 = new JLabel("Horario inicial");
-		contentPane.add(lblNewLabel_2, "cell 0 2,alignx trailing");
-
-		txtHr_inicio = new JTextField();
+		contentPane.add(new JLabel("Horario inicial (HH:mm)"), "cell 0 2,alignx trailing");
+		txtHr_inicio = new JTextField(10);
 		contentPane.add(txtHr_inicio, "cell 1 2 2 1,growx");
-		txtHr_inicio.setColumns(10);
 
-		lblNewLabel_3 = new JLabel("Horario final");
-		contentPane.add(lblNewLabel_3, "cell 0 3,alignx trailing");
-
-		txtHr_fim = new JTextField();
+		contentPane.add(new JLabel("Horario final (HH:mm)"), "cell 0 3,alignx trailing");
+		txtHr_fim = new JTextField(10);
 		contentPane.add(txtHr_fim, "cell 1 3 2 1,growx");
-		txtHr_fim.setColumns(10);
 
-		lblNewLabel_4 = new JLabel("Descrição");
-		contentPane.add(lblNewLabel_4, "cell 0 4,alignx trailing");
-
-		txtDescricao = new JTextField();
+		contentPane.add(new JLabel("Descrição"), "cell 0 4,alignx trailing");
+		txtDescricao = new JTextField(10);
 		contentPane.add(txtDescricao, "cell 1 4 2 1,growx");
-		txtDescricao.setColumns(10);
 
-		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar = new JButton("Adicionar");
 		contentPane.add(btnAdicionar, "cell 1 5,alignx center,aligny center");
-		btnAdicionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
 
-		JButton btnMostrar = new JButton("Mostrar");
-		btnMostrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+		btnMostrar = new JButton("Mostrar");
 		contentPane.add(btnMostrar, "cell 2 5,alignx center,aligny center");
 
-		JButton btnRemover = new JButton("Remover");
-		btnRemover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnRemover = new JButton("Remover");
 		contentPane.add(btnRemover, "cell 3 5,alignx center,aligny center");
-
 	}
 
+	
+	public void addAdicionarListener(ActionListener l) { btnAdicionar.addActionListener(l); }
+	public void addMostrarListener(ActionListener l) { btnMostrar.addActionListener(l); }
+	public void addRemoverListener(ActionListener l) { btnRemover.addActionListener(l); }
+
+	public void setLista(List<TimeM> itens) {
+		listModel.clear();
+		for (TimeM t : itens) {
+			listModel.addElement(t);
+		}
+	}
+
+	public TimeM getSelecionado() {
+		return list.getSelectedValue();
+	}
+
+	
 	public void mostrarMensagem(String texto) {
 		JOptionPane.showMessageDialog(this, texto);
 	}
 
 	public void mostrarErro(String texto) {
 		JOptionPane.showMessageDialog(this, texto, "Atenção", JOptionPane.WARNING_MESSAGE);
-
 	}
 
 	public void LimparCampos() {
@@ -137,34 +112,23 @@ public class TimeManagerJanela extends JFrame {
 		txtHr_inicio.setText("");
 		txtHr_fim.setText("");
 		txtDescricao.setText("");
-		
 	}
 
 	public void fechar() {
 		dispose();
 	}
 
-	public String getNome() {
-		return txtNome.getText();
-	}
+	
+	public String getNome() { return txtNome.getText(); }
+	public String getHrInicio() { return txtHr_inicio.getText(); }
+	public String getHrFim() { return txtHr_fim.getText(); } 
+	public String getDescricao() { return txtDescricao.getText(); }
 
-	public String getHrInicio() {
-		return txtHr_inicio.getText();
-	}
-
-	public String getHrFim() {
-		return txtHr_inicio.getText();
-	}
-
-	public String txtDescricao() {
-		return txtDescricao.getText();
-	}
 	public String getData() {
-		LocalDate dataAtual = LocalDate.now();
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String dataEmString = dataAtual.format(formatador);
-        return dataEmString;
+	
+		return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
+
 	public String getTag() {
 		return tag.getSelectedItem().toString();
 	}
