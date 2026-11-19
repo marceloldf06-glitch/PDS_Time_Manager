@@ -11,5 +11,6 @@ CREATE TABLE `horarios` (
   hora_fim varchar(45) NOT NULL,
   tag varchar(45) NOT NULL,
   Data varchar(45) NOT NULL,
+  Desc varchar(200),
   PRIMARY KEY (idhorarios)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci 
