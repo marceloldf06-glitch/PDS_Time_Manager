@@ -6,15 +6,15 @@ import java.util.List;
 
 import model.TimeBD;
 import model.TimeM;
-import view.TimeManagerJanela;
+import view.TimeView;
 
 public class TimeController {
 
-	private final TimeManagerJanela view;
+	private final TimeView view;
 	private final TimeBD bd;
 	private final TimeM model;
 
-	public TimeController(TimeManagerJanela view, TimeBD bd, TimeM model) {
+	public TimeController(TimeView view, TimeBD bd, TimeM model) {
 		this.view = view;
 		this.bd = bd;
 		this.model = model;

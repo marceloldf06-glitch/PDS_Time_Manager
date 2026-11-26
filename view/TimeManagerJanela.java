@@ -23,7 +23,7 @@ import javax.swing.border.EmptyBorder;
 import model.TimeM;
 import net.miginfocom.swing.MigLayout;
 
-public class TimeManagerJanela extends JFrame {
+public class TimeManagerJanela extends JFrame implements TimeView {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNome;
