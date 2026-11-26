@@ -1,4 +1,4 @@
-package teste;
+package controller;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
